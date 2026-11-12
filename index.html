@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Expense & Budget Visualizer</title>
+  <link rel="stylesheet" href="css/style.css" />
+  <script src="https://code.iconify.design/iconify-icon/2.1.0/iconify-icon.min.js"></script>
+</head>
+<body>
+
+  <div class="container">
+
+    <!-- Header -->
+    <header>
+      <h1 class = "title">Expense &amp; Budget Visualizer</h1>
+      <button id="theme-toggle" aria-label="Toggle dark mode">🌙 Dark Mode</button>
+    </header>
+
+    <!-- Total Balance Card -->
+    <section class="balance-card" aria-label="Total balance">
+      <h2>Total Balance</h2>
+      <p class="balance-amount"><span id="total-balance">$0.00</span></p>
+      <div class="limit-controls">
+        <label for="limit-input">Spending Limit:</label>
+        <input
+          type="number"
+          id="limit-input"
+          placeholder="Set a limit..."
+          min="0"
+          step="0.01"
+          aria-label="Spending limit amount"
+        />
+        <button id="set-limit-btn">Set Limit</button>
+      </div>
+    </section>
+
+    <!-- Add Transaction Form -->
+    <section class="form-card" aria-label="Add transaction">
+      <h2>Add Transaction</h2>
+      <form id="transaction-form" novalidate>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="item-name">Item Name</label>
+            <input
+              type="text"
+              id="item-name"
+              placeholder="e.g. Lunch"
+              autocomplete="off"
+            />
+          </div>
+          <div class="form-group">
+            <label for="item-amount">Amount ($)</label>
+            <input
+              type="number"
+              id="item-amount"
+              placeholder="0.00"
+              min="0.01"
+              step="0.01"
+            />
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="item-category">Category</label>
+          <select id="item-category">
+            <option value="">-- Select category --</option>
+            <option value="Food">Food</option>
+            <option value="Transport">Transport</option>
+            <option value="Fun">Hobby</option>
+            <option value="Electronic">Electronic</option>"
+          </select>
+        </div>
+        <button type="submit" class="btn-submit">Add Transaction</button>
+        <p id="form-error" role="alert" aria-live="polite"></p>
+      </form>
+    </section>
+
+    <!-- Bottom Grid: Transaction List + Chart -->
+    <div class="bottom-grid">
+
+      <!-- Left column: sort + transaction list -->
+      <section class="transactions-card" aria-label="Transaction history">
+        <div class="list-header">
+          <h2>Transactions</h2>
+          <label for="sort-select" class="sr-only">Sort by</label>
+          <select id="sort-select" aria-label="Sort transactions">
+            <option value="default">Default</option>
+            <option value="amount-asc">Amount: Low → High</option>
+            <option value="amount-desc">Amount: High → Low</option>
+            <option value="category-az">Category: A–Z</option>
+          </select>
+        </div>
+        <ul id="transaction-list" aria-label="List of transactions">
+          <!-- Transactions rendered by JavaScript -->
+        </ul>
+      </section>
+
+      <!-- Right column: pie chart -->
+      <section class="chart-card" aria-label="Spending by category chart">
+        <h2>Spending by Category</h2>
+        <canvas id="spending-chart" aria-label="Pie chart of spending by category" role="img"></canvas>
+      </section>
+
+    </div><!-- /.bottom-grid -->
+
+  </div><!-- /.container -->
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4/dist/chart.umd.min.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
